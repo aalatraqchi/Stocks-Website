@@ -1,0 +1,14 @@
+# Secrets
+.env
+API_Key.txt
+
+# Local data
+finance.db
+flask_session/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
