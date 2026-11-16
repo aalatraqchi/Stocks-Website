@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Log In
+    Quoted
 {% endblock %}
 
 {% block main %}
     <main class="container p-5 text-center">
-        <p> A share of {{ name }} ({{ symbol }}) costs {{ price }}</p>
+        <p class="lead">A share of {{ name }} ({{ symbol }}) costs <strong>{{ price }}</strong>.</p>
+        <a class="btn btn-primary" href="/buy?symbol={{ symbol | urlencode }}">Buy {{ symbol }}</a>
+        <a class="btn btn-outline-secondary" href="/quote">New quote</a>
     </main>
 {% endblock %}

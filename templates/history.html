@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Log In
+    History
 {% endblock %}
 
 {% block main %}
 <main class="container py-5 text-center">
+    {% if history %}
     <table class="table">
         <thead>
             <tr>
+                <th class="text-start">Type</th>
                 <th class="text-start">Symbol</th>
                 <th class="text-end">Shares</th>
                 <th class="text-end">Price</th>
@@ -18,23 +20,23 @@
         <tbody>
             {% for transaction in history %}
             <tr>
+                <td class="text-start">
+                    {% if transaction.shares > 0 %}
+                        <span class="badge bg-success">Buy</span>
+                    {% else %}
+                        <span class="badge bg-danger">Sell</span>
+                    {% endif %}
+                </td>
                 <td class="text-start">{{ transaction.symbol }}</td>
-                <td class="text-end">{{ transaction.shares }}</td>
-                <td class="text-end">${{ transaction.price }}</td>
+                <td class="text-end">{{ transaction.shares | abs }}</td>
+                <td class="text-end">{{ transaction.price | usd }}</td>
                 <td class="text-end">{{ transaction.datetime }}</td>
             </tr>
             {% endfor %}
         </tbody>
-        <tfoot>
-            <tr>
-                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
-                <td class="border-0 text-end">{{ cash }}</td>
-            </tr>
-            <tr>
-                <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
-                <td class="border-0 text-end">{{ total }}</td>
-            </tr>
-        </tfoot>
     </table>
+    {% else %}
+    <p class="text-muted">No transactions yet. <a href="/buy">Buy your first stock</a>.</p>
+    {% endif %}
 </main>
 {% endblock %}

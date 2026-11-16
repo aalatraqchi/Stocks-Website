@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Log In
+    Portfolio
 {% endblock %}
 
 {% block main %}
@@ -19,13 +19,15 @@
         <tbody>
             {% for symbol, items in stocks.items() %}
             <tr>
-                {% if items[1] > 0 %}
                 <td class="text-start">{{ symbol }}</td>
                 <td class="text-start">{{ items[0] }}</td>
                 <td class="text-end">{{ items[1] }}</td>
                 <td class="text-end">{{ items[2] }}</td>
                 <td class="text-end">{{ items[3] }}</td>
-                {% endif %}
+            </tr>
+            {% else %}
+            <tr>
+                <td class="text-muted py-4" colspan="5">You don't own any stocks yet. <a href="/quote">Look up a quote</a> or <a href="/buy">buy some shares</a>.</td>
             </tr>
             {% endfor %}
         </tbody>
